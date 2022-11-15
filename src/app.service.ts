@@ -4,8 +4,8 @@ import { GetTotalBalanceDTO } from './dto/get-total.dto';
 
 @Injectable()
 export class AppService {
-  baseUrl = process.env.URL || 'https://api-goerli.etherscan.io/api';
-  apiKey = process.env.APIKEY || 'WPAFJUIZEG3A9M88RXXR1FTD8DSN9HAHGG';
+  baseUrl = process.env.URL;
+  apiKey = process.env.APIKEY;
   constructor(private httpService: HttpService) {}
   getHello(): string {
     return 'Hello World!';
@@ -14,7 +14,6 @@ export class AppService {
     const url =
       this.baseUrl +
       `?module=account&action=balancemulti&address=${addresses}&apikey=${this.apiKey}`;
-    console.log(url);
     try {
       const res = await this.httpService.get(url).toPromise();
       return res.data.result;
